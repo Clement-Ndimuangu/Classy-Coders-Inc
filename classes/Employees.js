@@ -1,14 +1,15 @@
 class Employees {
     #salary
     #isHired
+    static #allEmployees =[];
+
     constructor(name, title, salary){
         this.name = name;
         this.title = title;
         this.#salary = salary;
         this.#isHired = true;
-        
-    }
-    static #allEmployees =[];
+        Employees.#allEmployees.push(this);        
+    }    
 
     getSalary(){
         return this.#salary;
@@ -29,6 +30,20 @@ class Employees {
             this.#isHired = false
         }
     }   
+
+    static getEmployees(){
+        return Employees.#allEmployees;
+    }
+
+    static getTotalPayroll(){
+        let salarySum = 0;
+
+        for(let i = 0; i < Employees.#allEmployees.length; i++){
+            salarySum += Employees.#allEmployees[i].#salary
+        }
+        return salarySum
+    }
+
 }
 
 module.exports = {
